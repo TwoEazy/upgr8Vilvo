@@ -1,229 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:#fff;
-  --text:#0a0a0a;--text-s:rgba(255,255,255,.6);--text-m:rgba(255,255,255,.4);
-  --ov:rgba(0,0,0,.24);--ob:rgba(0,0,0,.23);
-  --rc:100px;--rh:106px;--ro:72px;--rb:20px;--rn:34px;--rl:25px;
-  --f:'Outfit',sans-serif;
-  --dark:#0a0a0a;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:#fff;
+            --text:#0a0a0a;--text-s:rgba(255,255,255,.6);--text-m:rgba(255,255,255,.4);
+            --ov:rgba(0,0,0,.24);--ob:rgba(0,0,0,.23);
+            --rc:100px;--rh:106px;--ro:72px;--rb:20px;--rn:34px;--rl:25px;
+            --f:'Outfit',sans-serif;
+            --dark:#0a0a0a;
+        }
 
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden;scroll-snap-type:y proximity}
-body{background:var(--bg);color:var(--text);font-family:var(--f);font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
-button,input,textarea{font-family:inherit;border:none;outline:none}
-ul{list-style:none}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;overflow-x:hidden;scroll-snap-type:y proximity}
+        body{background:var(--bg);color:var(--text);font-family:var(--f);font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        a{text-decoration:none;color:inherit}
+        img{display:block;max-width:100%}
+        button,input,textarea{font-family:inherit;border:none;outline:none}
+        ul{list-style:none}
 
-.snap-section{scroll-snap-align:start;scroll-snap-stop:normal}
+        .snap-section{scroll-snap-align:start;scroll-snap-stop:normal}
 
-/* ═══ PAGE LOADER ═══ */
-.page-loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
-.page-loader.done{opacity:0;visibility:hidden;pointer-events:none}
-.page-loader .loader-text{font-family:var(--f);font-size:clamp(32px,6vw,56px);font-weight:600;letter-spacing:-.02em;color:var(--text);clip-path:inset(0 100% 0 0);animation:loaderReveal 1s .2s cubic-bezier(.77,0,.175,1) forwards}
-@keyframes loaderReveal{to{clip-path:inset(0 0% 0 0)}}
+        /* ═══ PAGE LOADER ═══ */
+        .page-loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+        .page-loader.done{opacity:0;visibility:hidden;pointer-events:none}
+        .page-loader .loader-text{font-family:var(--f);font-size:clamp(32px,6vw,56px);font-weight:600;letter-spacing:-.02em;color:var(--text);clip-path:inset(0 100% 0 0);animation:loaderReveal 1s .2s cubic-bezier(.77,0,.175,1) forwards}
+        @keyframes loaderReveal{to{clip-path:inset(0 0% 0 0)}}
 
-/* ═══ SCROLL REVEAL ═══ */
-.rv{opacity:0;transform:translateY(50px) scale(.98);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.vis{opacity:1;transform:translateY(0) scale(1)}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-.stagger>.rv:nth-child(1){transition-delay:0s}
-.stagger>.rv:nth-child(2){transition-delay:.1s}
-.stagger>.rv:nth-child(3){transition-delay:.2s}
-.stagger>.rv:nth-child(4){transition-delay:.3s}
+        /* ═══ SCROLL REVEAL ═══ */
+        .rv{opacity:0;transform:translateY(50px) scale(.98);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+        .rv.vis{opacity:1;transform:translateY(0) scale(1)}
+        .rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
+        .stagger>.rv:nth-child(1){transition-delay:0s}
+        .stagger>.rv:nth-child(2){transition-delay:.1s}
+        .stagger>.rv:nth-child(3){transition-delay:.2s}
+        .stagger>.rv:nth-child(4){transition-delay:.3s}
 
-@keyframes heroScale{from{transform:scale(1.08)}to{transform:scale(1)}}
-@keyframes fadeUp{from{opacity:0;transform:translateX(-50%) translateY(30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        @keyframes heroScale{from{transform:scale(1.08)}to{transform:scale(1)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateX(-50%) translateY(30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-/* ═══ LETTER ANIMATION ═══ */
-.la span.letter{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(20px);transition:all .5s cubic-bezier(.16,1,.3,1)}
-.la.vis span.letter,.la.hero-anim span.letter{opacity:1;filter:blur(0);transform:translateY(0)}
-.la span.space{display:inline-block;width:.3em}
+        /* ═══ LETTER ANIMATION ═══ */
+        .la span.letter{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(20px);transition:all .5s cubic-bezier(.16,1,.3,1)}
+        .la.vis span.letter,.la.hero-anim span.letter{opacity:1;filter:blur(0);transform:translateY(0)}
+        .la span.space{display:inline-block;width:.3em}
 
-/* ═══ NAV ═══ */
-.nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:12px;padding:8px;backdrop-filter:blur(40px) saturate(1.8);-webkit-backdrop-filter:blur(40px) saturate(1.8);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:var(--rn);box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.25);opacity:0;animation:fadeUp .6s 1.4s ease forwards}
-.nl{width:50px;height:50px;border-radius:var(--rl);flex-shrink:0;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-family:var(--f);font-size:11px;font-weight:700;color:var(--text)}
-.nk{display:flex;align-items:center;gap:4px}
-.nk a{font-size:13px;font-weight:400;color:rgba(255,255,255,.85);padding:10px 16px;border-radius:20px;transition:all .3s}
-.nk a:hover{color:#fff;background:rgba(255,255,255,.12)}
-.nav-cta{display:flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.9);color:var(--text);border-radius:var(--rb);font-family:var(--f);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;transition:all .3s;white-space:nowrap}
-.nav-cta:hover{background:#fff}
-.nav-cta svg{fill:var(--text)}
-.nm{display:none;align-items:center;gap:8px;padding:10px 20px;background:var(--text);color:#fff;border-radius:var(--rb);cursor:pointer;font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase}
-.nm svg{width:18px;height:18px}
+        /* ═══ NAV ═══ */
+        .nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:12px;padding:8px;backdrop-filter:blur(40px) saturate(1.8);-webkit-backdrop-filter:blur(40px) saturate(1.8);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:var(--rn);box-shadow:0 4px 30px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.25);opacity:0;animation:fadeUp .6s 1.4s ease forwards}
+        .nl{width:50px;height:50px;border-radius:var(--rl);flex-shrink:0;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-family:var(--f);font-size:11px;font-weight:700;color:var(--text)}
+        .nk{display:flex;align-items:center;gap:4px}
+        .nk a{font-size:13px;font-weight:400;color:rgba(255,255,255,.85);padding:10px 16px;border-radius:20px;transition:all .3s}
+        .nk a:hover{color:#fff;background:rgba(255,255,255,.12)}
+        .nav-cta{display:flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.9);color:var(--text);border-radius:var(--rb);font-family:var(--f);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;transition:all .3s;white-space:nowrap}
+        .nav-cta:hover{background:#fff}
+        .nav-cta svg{fill:var(--text)}
+        .nm{display:none;align-items:center;gap:8px;padding:10px 20px;background:var(--text);color:#fff;border-radius:var(--rb);cursor:pointer;font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase}
+        .nm svg{width:18px;height:18px}
 
-/* ═══ HERO ═══ */
-.hero{padding:12px}
-.hc{position:relative;width:100%;height:calc(100vh - 24px);min-height:600px;border-radius:var(--rh);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.hc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:heroScale 15s ease-out forwards}
-.hc::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.35)}
-.ht{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:750px}
-.ht h1{font-family:var(--f);font-weight:600;font-size:clamp(64px,12vw,130px);line-height:.95;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.ht .sub{font-family:var(--f);font-size:clamp(14px,2vw,20px);font-weight:400;letter-spacing:.02em;margin-bottom:24px;color:rgba(255,255,255,.85)}
-.ht p{font-family:var(--f);font-size:15px;line-height:1.7;max-width:520px;margin:0 auto;color:rgba(255,255,255,.7)}
+        /* ═══ HERO ═══ */
+        .hero{padding:12px}
+        .hc{position:relative;width:100%;height:calc(100vh - 24px);min-height:600px;border-radius:var(--rh);overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .hc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:heroScale 15s ease-out forwards}
+        .hc::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.35)}
+        .ht{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:750px}
+        .ht h1{font-family:var(--f);font-weight:600;font-size:clamp(64px,12vw,130px);line-height:.95;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
+        .ht .sub{font-family:var(--f);font-size:clamp(14px,2vw,20px);font-weight:400;letter-spacing:.02em;margin-bottom:24px;color:rgba(255,255,255,.85)}
+        .ht p{font-family:var(--f);font-size:15px;line-height:1.7;max-width:520px;margin:0 auto;color:rgba(255,255,255,.7)}
 
-/* ═══ PROJECT CARDS ═══ */
-.proj{padding:16px 12px;display:flex;flex-direction:column;gap:16px}
-.pc{position:relative;width:100%;height:85vh;min-height:500px;max-height:850px;border-radius:var(--rc);overflow:hidden;cursor:pointer}
-.pc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
-.pc:hover>img{transform:scale(1.04)}
-.po{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;backdrop-filter:blur(44px);-webkit-backdrop-filter:blur(44px);background:var(--ov);border-radius:var(--ro);padding:30px 50px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:280px}
-.po .ct{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.85)}
-.po h2{font-family:var(--f);font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-.02em;color:#fff}
-.eb{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);background:var(--ob);border-radius:var(--rb);font-family:var(--f);font-size:14px;font-weight:400;color:#fff;margin-top:8px;transition:background .3s}
-.eb:hover{background:rgba(0,0,0,.4)}
-.eb svg{width:18px;height:18px;fill:#fff}
+        /* ═══ PROJECT CARDS ═══ */
+        .proj{padding:16px 12px;display:flex;flex-direction:column;gap:16px}
+        .pc{position:relative;width:100%;height:85vh;min-height:500px;max-height:850px;border-radius:var(--rc);overflow:hidden;cursor:pointer}
+        .pc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+        .pc:hover>img{transform:scale(1.04)}
+        .po{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;backdrop-filter:blur(44px);-webkit-backdrop-filter:blur(44px);background:var(--ov);border-radius:var(--ro);padding:30px 50px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:280px}
+        .po .ct{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+        .po h2{font-family:var(--f);font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.1;letter-spacing:-.02em;color:#fff}
+        .eb{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);background:var(--ob);border-radius:var(--rb);font-family:var(--f);font-size:14px;font-weight:400;color:#fff;margin-top:8px;transition:background .3s}
+        .eb:hover{background:rgba(0,0,0,.4)}
+        .eb svg{width:18px;height:18px;fill:#fff}
 
-/* ═══ ABOUT ═══ */
-.abt{padding:12px}
-.ai{position:relative;border-radius:var(--rc);overflow:hidden;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 40px}
-.ai>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ai::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.55)}
-.ac{position:relative;z-index:2;max-width:650px}
-.at{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px;border:1px solid rgba(255,255,255,.3);display:inline-block;padding:8px 20px;border-radius:40px;color:rgba(255,255,255,.85)}
-.ac h2{font-family:var(--f);font-weight:600;font-size:clamp(56px,9vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:24px;color:#fff}
-.ac p{font-family:var(--f);font-size:15px;line-height:1.7;color:rgba(255,255,255,.75)}
+        /* ═══ ABOUT ═══ */
+        .abt{padding:12px}
+        .ai{position:relative;border-radius:var(--rc);overflow:hidden;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 40px}
+        .ai>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .ai::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.55)}
+        .ac{position:relative;z-index:2;max-width:650px}
+        .at{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px;border:1px solid rgba(255,255,255,.3);display:inline-block;padding:8px 20px;border-radius:40px;color:rgba(255,255,255,.85)}
+        .ac h2{font-family:var(--f);font-weight:600;font-size:clamp(56px,9vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:24px;color:#fff}
+        .ac p{font-family:var(--f);font-size:15px;line-height:1.7;color:rgba(255,255,255,.75)}
 
-/* ═══ CLIENTS MARQUEE ═══ */
-.cli{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
-.cli h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.cli>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 50px;line-height:1.7}
-.mw{width:100%;overflow:hidden;padding:10px 0;mask-image:linear-gradient(to right,transparent,#000 12.5%,#000 87.5%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 12.5%,#000 87.5%,transparent)}
-.mt{display:flex;align-items:center;gap:60px;animation:mq 30s linear infinite;width:max-content}
-@keyframes mq{to{transform:translateX(-50%)}}
-.li{flex-shrink:0;font-family:var(--f);font-size:24px;font-weight:500;color:rgba(255,255,255,.24)}
+        /* ═══ CLIENTS MARQUEE ═══ */
+        .cli{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
+        .cli h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
+        .cli>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 50px;line-height:1.7}
+        .mw{width:100%;overflow:hidden;padding:10px 0;mask-image:linear-gradient(to right,transparent,#000 12.5%,#000 87.5%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 12.5%,#000 87.5%,transparent)}
+        .mt{display:flex;align-items:center;gap:60px;animation:mq 30s linear infinite;width:max-content}
+        @keyframes mq{to{transform:translateX(-50%)}}
+        .li{flex-shrink:0;font-family:var(--f);font-size:24px;font-weight:500;color:rgba(255,255,255,.24)}
 
-/* ═══ REVIEWS ═══ */
-.rev{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
-.rev h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.rev>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 50px;line-height:1.7}
-.rw{width:100%;overflow:hidden;padding:10px 0;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
-.rtr{display:flex;gap:24px;animation:rmq 40s linear infinite;width:max-content}
-.rtr:hover{animation-play-state:paused}
-@keyframes rmq{to{transform:translateX(-50%)}}
-.rcrd{flex-shrink:0;width:360px;background:#fff;border-radius:8px;padding:24px;text-align:left;transition:box-shadow .3s;box-shadow:0 1px 4px rgba(0,0,0,.12)}
-.rcrd:hover{box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.rcrd-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.rcrd-avatar{width:40px;height:40px;border-radius:50%;background:#4285f4;display:flex;align-items:center;justify-content:center;font-family:var(--f);font-size:16px;font-weight:600;color:#fff;flex-shrink:0}
-.rcrd-info{display:flex;flex-direction:column}
-.rcrd-name{font-family:var(--f);font-size:14px;font-weight:500;color:#202124;line-height:1.3}
-.rcrd-meta{display:flex;align-items:center;gap:6px}
-.rcrd-stars{display:flex;gap:1px}
-.rcrd-stars svg{width:14px;height:14px;fill:#fbbc04}
-.rcrd-time{font-family:var(--f);font-size:12px;color:#70757a}
-.rcrd-g{margin-left:auto;flex-shrink:0}
-.rcrd-g svg{width:24px;height:24px}
-.rcrd-txt{font-family:var(--f);font-size:14px;font-weight:400;line-height:1.6;color:#4d5156;margin-top:4px}
+        /* ═══ REVIEWS ═══ */
+        .rev{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
+        .rev h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
+        .rev>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 50px;line-height:1.7}
+        .rw{width:100%;overflow:hidden;padding:10px 0;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)}
+        .rtr{display:flex;gap:24px;animation:rmq 40s linear infinite;width:max-content}
+        .rtr:hover{animation-play-state:paused}
+        @keyframes rmq{to{transform:translateX(-50%)}}
+        .rcrd{flex-shrink:0;width:360px;background:#fff;border-radius:8px;padding:24px;text-align:left;transition:box-shadow .3s;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+        .rcrd:hover{box-shadow:0 4px 16px rgba(0,0,0,.2)}
+        .rcrd-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+        .rcrd-avatar{width:40px;height:40px;border-radius:50%;background:#4285f4;display:flex;align-items:center;justify-content:center;font-family:var(--f);font-size:16px;font-weight:600;color:#fff;flex-shrink:0}
+        .rcrd-info{display:flex;flex-direction:column}
+        .rcrd-name{font-family:var(--f);font-size:14px;font-weight:500;color:#202124;line-height:1.3}
+        .rcrd-meta{display:flex;align-items:center;gap:6px}
+        .rcrd-stars{display:flex;gap:1px}
+        .rcrd-stars svg{width:14px;height:14px;fill:#fbbc04}
+        .rcrd-time{font-family:var(--f);font-size:12px;color:#70757a}
+        .rcrd-g{margin-left:auto;flex-shrink:0}
+        .rcrd-g svg{width:24px;height:24px}
+        .rcrd-txt{font-family:var(--f);font-size:14px;font-weight:400;line-height:1.6;color:#4d5156;margin-top:4px}
 
-/* ═══ SERVICES ═══ */
-.svc{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
-.sl{font-family:var(--f);font-weight:400;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:60px;color:rgba(255,255,255,.6)}
-.sc{position:relative;height:420px;perspective:1200px;margin:0 auto 40px;max-width:700px}
-.si{position:absolute;width:214px;height:284px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);top:50%;left:50%;transition:all .6s cubic-bezier(.16,1,.3,1);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.si img{width:100%;height:100%;object-fit:cover}
-.si[data-p="c"]{transform:translate(-50%,-50%) translateZ(1px);z-index:3}
-.si[data-p="l"]{transform:translate(calc(-50% - 160px),-75%) translateZ(-220px) rotateY(60deg);z-index:1}
-.si[data-p="r"]{transform:translate(calc(-50% + 160px),-75%) translateZ(-220px) rotateY(-60deg);z-index:1}
-.si[data-p="b"]{transform:translate(-50%,-50%) translateZ(-360px);z-index:0;opacity:.4}
-.pls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px}
-.pl2{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:100px;padding:10px 24px;cursor:pointer;transition:all .3s}
-.pl2.act{background:rgba(255,255,255,.9);color:var(--dark);border-color:transparent}
-.pl2:not(.act){opacity:.5;transform:scale(.95)}
-.pl2 .n{font-family:var(--f);font-size:14px;font-weight:500;letter-spacing:.1em}
-.pl2 .t{font-family:var(--f);font-size:14px;font-weight:400;letter-spacing:-.01em}
-.sd{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:550px;margin:0 auto;line-height:1.7}
+        /* ═══ SERVICES ═══ */
+        .svc{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
+        .sl{font-family:var(--f);font-weight:400;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:60px;color:rgba(255,255,255,.6)}
+        .sc{position:relative;height:420px;perspective:1200px;margin:0 auto 40px;max-width:700px}
+        .si{position:absolute;width:214px;height:284px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);top:50%;left:50%;transition:all .6s cubic-bezier(.16,1,.3,1);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+        .si img{width:100%;height:100%;object-fit:cover}
+        .si[data-p="c"]{transform:translate(-50%,-50%) translateZ(1px);z-index:3}
+        .si[data-p="l"]{transform:translate(calc(-50% - 160px),-75%) translateZ(-220px) rotateY(60deg);z-index:1}
+        .si[data-p="r"]{transform:translate(calc(-50% + 160px),-75%) translateZ(-220px) rotateY(-60deg);z-index:1}
+        .si[data-p="b"]{transform:translate(-50%,-50%) translateZ(-360px);z-index:0;opacity:.4}
+        .pls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+        .pl2{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:100px;padding:10px 24px;cursor:pointer;transition:all .3s}
+        .pl2.act{background:rgba(255,255,255,.9);color:var(--dark);border-color:transparent}
+        .pl2:not(.act){opacity:.5;transform:scale(.95)}
+        .pl2 .n{font-family:var(--f);font-size:14px;font-weight:500;letter-spacing:.1em}
+        .pl2 .t{font-family:var(--f);font-size:14px;font-weight:400;letter-spacing:-.01em}
+        .sd{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:550px;margin:0 auto;line-height:1.7}
 
-/* ═══ MILESTONES ═══ */
-.mil{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
-.mg{display:flex;justify-content:center;gap:80px;flex-wrap:wrap;max-width:900px;margin:0 auto}
-.mi{flex:1;min-width:250px}
-.mn{font-family:var(--f);font-size:clamp(64px,8vw,98px);font-weight:600;line-height:1;color:#fff}
-.mn .pl{color:rgba(255,255,255,.3)}
-.ml{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.5);margin-top:12px}
-.mdv{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
+        /* ═══ MILESTONES ═══ */
+        .mil{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
+        .mg{display:flex;justify-content:center;gap:80px;flex-wrap:wrap;max-width:900px;margin:0 auto}
+        .mi{flex:1;min-width:250px}
+        .mn{font-family:var(--f);font-size:clamp(64px,8vw,98px);font-weight:600;line-height:1;color:#fff}
+        .mn .pl{color:rgba(255,255,255,.3)}
+        .ml{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.5);margin-top:12px}
+        .mdv{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
 
-/* ═══ JOURNAL ═══ */
-.jnl{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
-.jnl h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.jnl>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:550px;margin:0 auto 60px;line-height:1.7}
-.jg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;max-width:1400px;margin:0 auto}
-.jc{position:relative;border-radius:var(--rc);overflow:hidden;aspect-ratio:3/4;cursor:pointer;display:block}
-.jc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
-.jc:hover img{transform:scale(1.04)}
-.jc::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 60%)}
-.jt{position:absolute;bottom:40px;left:0;right:0;z-index:2;padding:0 40px;text-align:center}
-.jt p{font-family:var(--f);font-size:16px;line-height:1.4;margin-bottom:10px;color:#fff}
-.jt .tg{font-family:var(--f);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+        /* ═══ JOURNAL ═══ */
+        .jnl{padding:100px 40px;text-align:center;background:var(--dark);color:#fff}
+        .jnl h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
+        .jnl>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.6);max-width:550px;margin:0 auto 60px;line-height:1.7}
+        .jg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;max-width:1400px;margin:0 auto}
+        .jc{position:relative;border-radius:var(--rc);overflow:hidden;aspect-ratio:3/4;cursor:pointer;display:block}
+        .jc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+        .jc:hover img{transform:scale(1.04)}
+        .jc::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 60%)}
+        .jt{position:absolute;bottom:40px;left:0;right:0;z-index:2;padding:0 40px;text-align:center}
+        .jt p{font-family:var(--f);font-size:16px;line-height:1.4;margin-bottom:10px;color:#fff}
+        .jt .tg{font-family:var(--f);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 
-/* ═══ CONTACT ═══ */
-.cnt2{padding:12px}
-.ci{position:relative;border-radius:var(--rc);overflow:hidden;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px}
-.ci>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ci::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
-.cc{position:relative;z-index:2;text-align:center;max-width:560px;width:100%}
-.cc h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
-.cc>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:40px}
-.fc{backdrop-filter:blur(44px);-webkit-backdrop-filter:blur(44px);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:46px;padding:40px 36px;text-align:left}
-.fc .ft2{text-align:center;font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;margin-bottom:30px;color:rgba(255,255,255,.7)}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.fg{margin-bottom:16px}
-.fg label{display:block;font-family:var(--f);font-size:14px;margin-bottom:8px;color:#fff}
-.fg input,.fg textarea{width:100%;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:14px;font-family:inherit;transition:border-color .3s}
-.fg textarea{resize:vertical;min-height:80px}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.4)}
-.fg input:focus,.fg textarea:focus{border-color:rgba(255,255,255,.4)}
-.sb{width:100%;padding:14px 24px;background:#fff;color:var(--dark);font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;border-radius:var(--rb);cursor:pointer;transition:all .3s;margin-top:8px}
-.sb:hover{opacity:.9;transform:translateY(-1px)}
+        /* ═══ CONTACT ═══ */
+        .cnt2{padding:12px}
+        .ci{position:relative;border-radius:var(--rc);overflow:hidden;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px}
+        .ci>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+        .ci::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
+        .cc{position:relative;z-index:2;text-align:center;max-width:560px;width:100%}
+        .cc h2{font-family:var(--f);font-weight:600;font-size:clamp(48px,8vw,96px);line-height:1;letter-spacing:-.03em;margin-bottom:16px;color:#fff}
+        .cc>p{font-family:var(--f);font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:40px}
+        .fc{backdrop-filter:blur(44px);-webkit-backdrop-filter:blur(44px);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:46px;padding:40px 36px;text-align:left}
+        .fc .ft2{text-align:center;font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;margin-bottom:30px;color:rgba(255,255,255,.7)}
+        .fr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .fg{margin-bottom:16px}
+        .fg label{display:block;font-family:var(--f);font-size:14px;margin-bottom:8px;color:#fff}
+        .fg input,.fg textarea{width:100%;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:14px;font-family:inherit;transition:border-color .3s}
+        .fg textarea{resize:vertical;min-height:80px}
+        .fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.4)}
+        .fg input:focus,.fg textarea:focus{border-color:rgba(255,255,255,.4)}
+        .sb{width:100%;padding:14px 24px;background:#fff;color:var(--dark);font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;border-radius:var(--rb);cursor:pointer;transition:all .3s;margin-top:8px}
+        .sb:hover{opacity:.9;transform:translateY(-1px)}
 
-/* ═══ FOOTER ═══ */
-.ftr{padding:12px}
-.fii{background:var(--dark);color:#fff;border-radius:var(--rc);padding:60px 50px 40px;overflow:hidden}
-.ftp{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:60px}
-.fs{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;color:rgba(255,255,255,.5)}
-.fe{font-family:var(--f);font-size:clamp(18px,2.5vw,28px);font-weight:500;letter-spacing:-.02em;display:block;margin-bottom:16px;transition:opacity .3s}.fe:hover{opacity:.7}
-.fde{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px}
-.floc{font-family:var(--f);font-size:13px;color:rgba(255,255,255,.35);margin-top:12px;line-height:1.5}
-.fn ul{display:flex;flex-direction:column;gap:10px}
-.fni{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.fni a{font-family:var(--f);font-size:clamp(16px,2vw,22px);font-weight:500;letter-spacing:-.02em;transition:opacity .3s}.fni a:hover{opacity:.7}
-.fni .cnt{font-family:var(--f);font-size:13px;color:rgba(255,255,255,.4)}
-.fsl{font-family:var(--f);font-size:12px;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.4);text-transform:uppercase;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
-.soc{display:flex;gap:16px}
-.soc a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;opacity:.4;transition:opacity .3s}.soc a:hover{opacity:.8}
-.soc svg{width:24px;height:24px;fill:#fff}
-.fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:30px;display:flex;align-items:flex-end;justify-content:space-between}
-.fwm{font-family:var(--f);font-size:clamp(40px,5vw,64px);font-weight:600;color:rgba(255,255,255,.15);line-height:1;letter-spacing:-.03em}
-.fcp{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.35);padding-bottom:8px}
+        /* ═══ FOOTER ═══ */
+        .ftr{padding:12px}
+        .fii{background:var(--dark);color:#fff;border-radius:var(--rc);padding:60px 50px 40px;overflow:hidden}
+        .ftp{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:60px}
+        .fs{font-family:var(--f);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;color:rgba(255,255,255,.5)}
+        .fe{font-family:var(--f);font-size:clamp(18px,2.5vw,28px);font-weight:500;letter-spacing:-.02em;display:block;margin-bottom:16px;transition:opacity .3s}.fe:hover{opacity:.7}
+        .fde{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:20px}
+        .floc{font-family:var(--f);font-size:13px;color:rgba(255,255,255,.35);margin-top:12px;line-height:1.5}
+        .fn ul{display:flex;flex-direction:column;gap:10px}
+        .fni{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+        .fni a{font-family:var(--f);font-size:clamp(16px,2vw,22px);font-weight:500;letter-spacing:-.02em;transition:opacity .3s}.fni a:hover{opacity:.7}
+        .fni .cnt{font-family:var(--f);font-size:13px;color:rgba(255,255,255,.4)}
+        .fsl{font-family:var(--f);font-size:12px;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.4);text-transform:uppercase;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
+        .soc{display:flex;gap:16px}
+        .soc a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;opacity:.4;transition:opacity .3s}.soc a:hover{opacity:.8}
+        .soc svg{width:24px;height:24px;fill:#fff}
+        .fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:30px;display:flex;align-items:flex-end;justify-content:space-between}
+        .fwm{font-family:var(--f);font-size:clamp(40px,5vw,64px);font-weight:600;color:rgba(255,255,255,.15);line-height:1;letter-spacing:-.03em}
+        .fcp{font-family:var(--f);font-size:14px;color:rgba(255,255,255,.35);padding-bottom:8px}
 
-/* ═══ MOBILE MENU ═══ */
-.mm{position:fixed;inset:0;z-index:200;background:var(--dark);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .4s}
-.mm.open{opacity:1;pointer-events:all}
-.mm a{font-family:var(--f);font-size:36px;font-weight:500;text-transform:lowercase;color:#fff;transition:opacity .3s}.mm a:hover{opacity:.5}
-.mcl{position:absolute;top:24px;right:24px;background:#fff;color:var(--dark);padding:10px 24px;border-radius:var(--rb);font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase;cursor:pointer}
+        /* ═══ MOBILE MENU ═══ */
+        .mm{position:fixed;inset:0;z-index:200;background:var(--dark);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .4s}
+        .mm.open{opacity:1;pointer-events:all}
+        .mm a{font-family:var(--f);font-size:36px;font-weight:500;text-transform:lowercase;color:#fff;transition:opacity .3s}.mm a:hover{opacity:.5}
+        .mcl{position:absolute;top:24px;right:24px;background:#fff;color:var(--dark);padding:10px 24px;border-radius:var(--rb);font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase;cursor:pointer}
 
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:809px){
-  .nk{display:none}.nav-cta{display:none}.nm{display:flex}
-  .hc{border-radius:30px}.pc{height:65vh;border-radius:30px;min-height:400px}
-  .po{padding:24px 36px;border-radius:50px;min-width:220px}
-  .ai{border-radius:30px;padding:80px 24px}
-  .jc{border-radius:30px}
-  .jg{grid-template-columns:1fr}.ci{border-radius:30px}.fr{grid-template-columns:1fr}
-  .fii{border-radius:40px;padding:40px 24px 30px}
-  .ftp{grid-template-columns:1fr;gap:30px}
-  .fbt{flex-direction:column;align-items:flex-start;gap:16px}
-  .mg{gap:40px}.sc{height:320px}.si{width:160px;height:212px}
-  .cli,.svc,.mil,.jnl,.rev{padding:60px 24px}
-  .rcrd{width:300px;padding:24px}
-}
-</style>
+        /* ═══ RESPONSIVE ═══ */
+        @media(max-width:809px){
+            .nk{display:none}.nav-cta{display:none}.nm{display:flex}
+            .hc{border-radius:30px}.pc{height:65vh;border-radius:30px;min-height:400px}
+            .po{padding:24px 36px;border-radius:50px;min-width:220px}
+            .ai{border-radius:30px;padding:80px 24px}
+            .jc{border-radius:30px}
+            .jg{grid-template-columns:1fr}.ci{border-radius:30px}.fr{grid-template-columns:1fr}
+            .fii{border-radius:40px;padding:40px 24px 30px}
+            .ftp{grid-template-columns:1fr;gap:30px}
+            .fbt{flex-direction:column;align-items:flex-start;gap:16px}
+            .mg{gap:40px}.sc{height:320px}.si{width:160px;height:212px}
+            .cli,.svc,.mil,.jnl,.rev{padding:60px 24px}
+            .rcrd{width:300px;padding:24px}
+        }
+    </style>
 </head>
 <body>
 
@@ -241,10 +241,10 @@ ul{list-style:none}
 
 <!-- SERVICES SHOWCASE -->
 <section class="proj snap-section stagger" id="proj">
-<div class="pc rv"><img src="images/image2.png" alt=""><div class="po"><span class="ct">Most Popular</span><h2 class="la">Smartphone Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
-<div class="pc rv"><img src="images/image3.png" alt=""><div class="po"><span class="ct">Hardware &amp; Software</span><h2 class="la">PC &amp; Laptop Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
-<div class="pc rv"><img src="images/image4.png" alt=""><div class="po"><span class="ct">All Platforms</span><h2 class="la">Console Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
-<div class="pc rv"><img src="images/image5.png" alt=""><div class="po"><span class="ct">Wearables &amp; Tablets</span><h2 class="la">Tablet &amp; Watch</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
+    <div class="pc rv"><img src="images/image2.png" alt=""><div class="po"><span class="ct">Most Popular</span><h2 class="la">Smartphone Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
+    <div class="pc rv"><img src="images/image3.png" alt=""><div class="po"><span class="ct">Hardware &amp; Software</span><h2 class="la">PC &amp; Laptop Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
+    <div class="pc rv"><img src="images/image4.png" alt=""><div class="po"><span class="ct">All Platforms</span><h2 class="la">Console Repair</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
+    <div class="pc rv"><img src="images/image5.png" alt=""><div class="po"><span class="ct">Wearables &amp; Tablets</span><h2 class="la">Tablet &amp; Watch</h2><a href="#cnt" class="eb">Book Repair <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></a></div></div>
 </section>
 
 <!-- ABOUT -->
@@ -254,27 +254,20 @@ ul{list-style:none}
 
 <!-- REVIEWS -->
 <section class="rev snap-section"><h2 class="rv la">reviews</h2><p class="rv rv-d1">What our customers say about their repair experience at UPGR8.</p>
-<div class="rw rv rv-d2"><div class="rtr" id="revTrack">
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#4285f4">M</div><div class="rcrd-info"><span class="rcrd-name">Mehdi B.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">2 weeks ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">Fixed my iPhone screen in under an hour. Looks brand new and the price was very fair. Highly recommend!</div></div>
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#ea4335">S</div><div class="rcrd-info"><span class="rcrd-name">Sarah V.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">1 month ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">My laptop was overheating and shutting down constantly. They cleaned it, replaced the thermal paste, and now it runs perfectly. Great service!</div></div>
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#34a853">Y</div><div class="rcrd-info"><span class="rcrd-name">Youssef A.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">3 weeks ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">Brought in my PS5 with an HDMI port issue. They had it fixed the same day. Super professional and friendly team.</div></div>
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#fbbc05;color:#202124">L</div><div class="rcrd-info"><span class="rcrd-name">Lisa D.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">2 months ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">My Samsung tablet screen was completely shattered. They replaced it quickly and it looks perfect. Will definitely come back.</div></div>
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#4285f4">T</div><div class="rcrd-info"><span class="rcrd-name">Thomas K.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">1 month ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">Excellent repair shop. They were honest about what needed fixing and did not try to upsell me. My MacBook works like new again.</div></div>
-<div class="rcrd"><div class="rcrd-head"><div class="rcrd-avatar" style="background:#ea4335">F</div><div class="rcrd-info"><span class="rcrd-name">Fatima Z.</span><div class="rcrd-meta"><div class="rcrd-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><span class="rcrd-time">3 weeks ago</span></div></div><div class="rcrd-g"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div></div><div class="rcrd-txt">Dropped off my Nintendo Switch with stick drift. Got it back the next day working perfectly. Amazing turnaround time!</div></div>
-</div></div></section>
+    <div class="rw rv rv-d2"><div class="rtr" id="revTrack"></div></div></section>
 
 <!-- SERVICES DETAIL -->
 <section class="svc snap-section"><div class="sl rv">What We Fix</div>
-<div class="sc rv rv-d1"><div class="si" data-p="l" data-i="0"><img src="images/image7.png" alt=""></div><div class="si" data-p="c" data-i="1"><img src="images/image8.png" alt=""></div><div class="si" data-p="r" data-i="2"><img src="images/image9.png" alt=""></div><div class="si" data-p="b" data-i="3"><img src="images/image10.png" alt=""></div></div>
-<div class="pls rv rv-d2"><button class="pl2" data-s="0" onclick="setSvc(0)"><span class="n">01</span><span class="t">Smartphones</span></button><button class="pl2 act" data-s="1" onclick="setSvc(1)"><span class="n">02</span><span class="t">PC &amp; Laptop</span></button><button class="pl2" data-s="2" onclick="setSvc(2)"><span class="n">03</span><span class="t">Consoles</span></button><button class="pl2" data-s="3" onclick="setSvc(3)"><span class="n">04</span><span class="t">Tablets &amp; More</span></button></div>
-<p class="sd rv rv-d3" id="sd">From hardware diagnostics to full component replacements, we handle laptops and desktops of all brands. Broken screen, failing hard drive, or overheating GPU — we have got you covered.</p></section>
+    <div class="sc rv rv-d1"><div class="si" data-p="l" data-i="0"><img src="images/image7.png" alt=""></div><div class="si" data-p="c" data-i="1"><img src="images/image8.png" alt=""></div><div class="si" data-p="r" data-i="2"><img src="images/image9.png" alt=""></div><div class="si" data-p="b" data-i="3"><img src="images/image10.png" alt=""></div></div>
+    <div class="pls rv rv-d2"><button class="pl2" data-s="0" onclick="setSvc(0)"><span class="n">01</span><span class="t">Smartphones</span></button><button class="pl2 act" data-s="1" onclick="setSvc(1)"><span class="n">02</span><span class="t">PC &amp; Laptop</span></button><button class="pl2" data-s="2" onclick="setSvc(2)"><span class="n">03</span><span class="t">Consoles</span></button><button class="pl2" data-s="3" onclick="setSvc(3)"><span class="n">04</span><span class="t">Tablets &amp; More</span></button></div>
+    <p class="sd rv rv-d3" id="sd">From hardware diagnostics to full component replacements, we handle laptops and desktops of all brands. Broken screen, failing hard drive, or overheating GPU — we have got you covered.</p></section>
 
 <!-- MILESTONES -->
 <section class="mil snap-section"><div class="sl rv">By The Numbers</div><div class="mg"><div class="mi rv"><div class="mn"><span class="ctr" data-t="2000">0</span><span class="pl">+</span></div><div class="ml">Devices Repaired</div></div><div class="mdv"></div><div class="mi rv rv-d2"><div class="mn"><span class="ctr" data-t="7">0</span><span class="pl">+</span></div><div class="ml">Device Categories Serviced</div></div></div></section>
 
 <!-- TIPS -->
 <section class="jnl snap-section" id="jnl"><h2 class="rv la">tips</h2><p class="rv rv-d1">Helpful advice to keep your devices running longer. From maintenance tips to knowing when it is time for a professional repair.</p>
-<div class="jg stagger"><a href="#" class="jc rv"><img src="images/image11.png" alt=""><div class="jt"><p>5 Ways to Protect Your Phone Screen</p><span class="tg">Prevention</span></div></a><a href="#" class="jc rv"><img src="images/image12.png" alt=""><div class="jt"><p>Signs Your Laptop Needs Professional Repair</p><span class="tg">Diagnostics</span></div></a><a href="#" class="jc rv"><img src="images/image13.png" alt=""><div class="jt"><p>How to Keep Your Console Running Cool</p><span class="tg">Maintenance</span></div></a></div></section>
+    <div class="jg stagger"><a href="#" class="jc rv"><img src="images/image11.png" alt=""><div class="jt"><p>5 Ways to Protect Your Phone Screen</p><span class="tg">Prevention</span></div></a><a href="#" class="jc rv"><img src="images/image12.png" alt=""><div class="jt"><p>Signs Your Laptop Needs Professional Repair</p><span class="tg">Diagnostics</span></div></a><a href="#" class="jc rv"><img src="images/image13.png" alt=""><div class="jt"><p>How to Keep Your Console Running Cool</p><span class="tg">Maintenance</span></div></a></div></section>
 
 <!-- CONTACT -->
 <section class="cnt2 snap-section" id="cnt"><div class="ci"><img src="images/image14.png" alt=""><div class="cc rv"><h2 class="la">get in touch</h2><p>Need a repair? Drop by our shop or send us a message. We will get back to you with a quote and estimated turnaround time.</p><div class="fc"><div class="ft2">repair request</div><div class="fr"><div class="fg" style="margin-bottom:0"><label>First name</label><input type="text" placeholder="Ahmed"></div><div class="fg" style="margin-bottom:0"><label>Last name</label><input type="text" placeholder="Doe"></div></div><div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div><div class="fg"><label>Phone</label><input type="tel" placeholder="+32 ..."></div><div class="fg"><label>Device &amp; Issue</label><textarea placeholder="e.g. iPhone 15 Pro — cracked screen + battery drain"></textarea></div><button class="sb">Submit Request</button></div></div></div></section>
@@ -283,94 +276,323 @@ ul{list-style:none}
 <footer class="ftr snap-section"><div class="fii"><div class="ftp"><div><div class="fs">Visit us.</div><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank" class="fe">Leuvensestraat 76</a><p class="fde">UPGR8 is a consumer electronics repair business based in Vilvoorde, Belgium. We fix smartphones, tablets, PCs, gaming consoles, smartwatches, and more.</p><div class="floc">Leuvensestraat 76<br>1800 Vilvoorde, Belgium</div></div><div class="fn"><ul><li class="fni"><a href="#hero">Home</a><span class="cnt"></span></li><li class="fni"><a href="#abt">About</a><span class="cnt"></span></li><li class="fni"><a href="#proj">Services</a><span class="cnt">(07)</span></li><li class="fni"><a href="#jnl">Tips</a><span class="cnt">(03)</span></li><li class="fni"><a href="#cnt">Contact</a><span class="cnt"></span></li></ul></div><div><div class="fsl">Find Us Online</div><div class="soc"><a href="https://www.instagram.com/upgr8.be/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a></div></div></div><div class="fbt"><div class="fwm">UPGR8</div><div class="fcp">©2025 UPGR8. Vilvoorde, Belgium.</div></div></div></footer>
 
 <script>
-// Letter animation - splits text into individual spans like Framer
-function splitLetters(el) {
-  const text = el.textContent;
-  const words = text.split(' ');
-  let charIdx = 0;
-  el.innerHTML = words.map(word => {
-    const letters = word.split('').map(char => {
-      const delay = charIdx * 0.03;
-      charIdx++;
-      return '<span class="letter" style="transition-delay:' + delay + 's">' + char + '</span>';
-    }).join('');
-    charIdx++;
-    return '<span style="white-space:nowrap">' + letters + '</span>';
-  }).join('<span class="space"> </span>');
-}
+    // Google Maps Reviews Data
+    const reviewsData = [
+        {
+            "name": "Nico Van Damme",
+            "stars": 5,
+            "text": "Mijn laptop scherm was kapot ,  heb hun gecontacteerd via whatsapp , direct zeer goed en vriendelijk contact ... goede en snelle service aan de correcte prijs.\nZeker een aanrader voor herstellingen !"
+        },
+        {
+            "name": "Philippe Parloo",
+            "stars": 5,
+            "text": "Meest sympathieke en behulpzame mensen die Vilvoorde rijk is. Grote kennis van IT en de mogelijkheden rondom. Ik wens hun zeker een lang bedtaan toe, en ben vanaf nu trouwe klant aan huis. Echt een aanrader om contact op te nemen indien u op zoek bent naar een nieuwe laptop, een reparatie van huidige computer of andere."
+        },
+        {
+            "name": "Savannah Parloo",
+            "stars": 5,
+            "text": "Bedankt om mij zo snel uit de nood te helpen! Super goede service. :)"
+        },
+        {
+            "name": "Peggy Renard",
+            "stars": 5,
+            "text": "Ongelooflijk vriendelijk en behulpzaam, een echte aanrader. Heel erg bedankt! 😃"
+        },
+        {
+            "name": "Wixizz FN",
+            "stars": 5,
+            "text": "Incroyable, résous le problème directement !"
+        },
+        {
+            "name": "Mohamed Riani",
+            "stars": 5,
+            "text": "Topservice! Mijn gsm was zwaar beschadigd en zelfs bij Apple konden ze het probleem niet herstellen. Gelukkig ben ik hier terechtgekomen en zij hebben mijn toestel volledig kunnen repareren.\n\nHeel professionele service, snelle afhandeling en duidelijke communicatie. Mijn gsm werkt weer perfect alsof hij nieuw is.\n\nVoor mij absoluut 5 sterren waard. Zeker een aanrader voor iedereen die een betrouwbare gsm-hersteller zoekt!"
+        },
+        {
+            "name": "Simo Chaker",
+            "stars": 5,
+            "text": "Service au top !\nSmartphone réparé rapidement, travail soigné et personne très professionnelle.\nAccueil chaleureux, explications claires et prix correct.\n\nJe recommande vivement pour tout problème de téléphone, vous pouvez y aller en toute confiance !"
+        },
+        {
+            "name": "Pedro Marta",
+            "stars": 5,
+            "text": "Really good service!"
+        },
+        {
+            "name": "Dominique Godart",
+            "stars": 5,
+            "text": "Rapide et sympas je recommande cette boutique de réparation ! Au top les gars merci à vous"
+        },
+        {
+            "name": "Delphine Elsen",
+            "stars": 5,
+            "text": "Service impeccable, rapidité, efficacité, équipe pro !"
+        },
+        {
+            "name": "jojo dries",
+            "stars": 5,
+            "text": "Supervriendelijke service, mijn PS5 is perfect hersteld en dat ook nog eens snel en aan een scherpe prijs."
+        },
+        {
+            "name": "Laurynas Leleika",
+            "stars": 5,
+            "text": "This business provides probably the best customer service in Belgium! I had my iPhone screen replaced here. It only took 1 day for the original parts to arrive and the next day my screen was replaced in 30 minutes. The technician is very friendly and open about all of the options and pricing (original vs non-original). He also speaks 4 languages and is a true expert with many years of experience in his field. My phone looks and feels brand new.\nThank you so much!\n8 stars! ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️"
+        },
+        {
+            "name": "Sofie Van Loey",
+            "stars": 5,
+            "text": "Supersnelle service ik belde voor herstelling scherm samsung telefoon om 20u30 ´s avonds er was geen op voorraad en we spraken af om de volgende dag herstelling uit te voeren. Niet veel later belde hij me terug en ging hij nog om scherm en ik mocht nog langs gaan! Gevolg was dat ik om 22u30 heel tevreden bij hem vertrok met herstelde gsm ! meer dan 5 sterren waard ! Bedankt Reda"
+        },
+        {
+            "name": "Navar",
+            "stars": 5,
+            "text": "This guy is an actual Hero, he fixed a completely broken phone screen on the 01. of january. His Service is way beyond expectation."
+        },
+        {
+            "name": "Zini Bob",
+            "stars": 5,
+            "text": "Ik kwam binnen met een apparaat dat zich gedroeg alsof het zelf al had opgegeven, maar deze reparatiewinkel had daar duidelijk andere plannen mee. Binnen no-time werd het probleem gevonden, uitgelegd alsof ik geen handleiding nodig had, en vakkundig opgelost. Het apparaat werkt nu zo goed dat ik bijna denk dat ze het stiekem beter hebben gemaakt dan nieuw. Vriendelijke service, snelle reparatie en nul drama."
+        },
+        {
+            "name": "Noko Noko",
+            "stars": 5,
+            "text": "Ik had alle hoop verloren toen ik mijn pc uit de raam had gegooid maar deze mannen hebben die kunnen herstellen ."
+        },
+        {
+            "name": "Hendrik Vanderherten",
+            "stars": 5,
+            "text": "Mijn playstation was kapot, maar toch heeft hij alles geprobeerd om hem te maken. Dat laat zien dat hij echt moeite doet voor zijn klanten. Hij werkt eerlijk en denkt mee en vraagt geen hoge prijs. Het was een heel lastige reparatie mijn ps5 is nu perfect om weer te gaan gamen. Zeker een aanrader!"
+        },
+        {
+            "name": "Mehi Wegi",
+            "stars": 5,
+            "text": "Snel en efficiënte werk ."
+        },
+        {
+            "name": "Jon L",
+            "stars": 5,
+            "text": "Super impressive service from the UPGR8 guys to fix a broken iPhone. Really went above and beyond to do the best possible job. And then charged the same as for the more basic job they quoted for. Strongly recommended!"
+        },
+        {
+            "name": "Asdin Arras",
+            "stars": 5,
+            "text": "Vraiment très professionnel Réda et en plus super sympha, orienté service - sa gentilesse et ses conseils sont fortement appréciés.  Je vous le recommande pour toutes ces qualités, son acceuil et son honnêteté. Merci Réda pour le dépannage de ce soir"
+        },
+        {
+            "name": "Yordanov Svetoslav",
+            "stars": 5,
+            "text": "Je suis très satisfait de leur travail, je vous le recommande, des prix abordables pour tous et surtout, la confiance, vous pouvez y aller en toute confiance, si vous avez des problèmes, demandez, je les remercie encore une fois, excellent travail."
+        },
+        {
+            "name": "Charlotte",
+            "stars": 5,
+            "text": "Top service ! Ik ben er geweest om het scherm van mijn iphone mini 12 te herstellen. De prijs kwaliteit is onverslaanbaar ; de reparatie tijd was super kort ; 25 min en klaar was Kees. Daarbovenop,  een super lieve respectvolle en inspirerende reparateur 🧑‍🔧. Heeft gedurende heel het proces uitgelegd wat hij deed, zijn zaak en leuke tips. Veruit de beste in heel de streek. Vergeet geen afspraak te nemen 🙂"
+        },
+        {
+            "name": "Rumen",
+            "stars": 5,
+            "text": "They fixed my iPhone screen"
+        },
+        {
+            "name": "kwhr tkl",
+            "stars": 5,
+            "text": "Un service rapide, impeccable, rapport qualité prix correct et le réparateur étais tres sympa. Je recommande :)"
+        },
+        {
+            "name": "Morgane Uyttendaele",
+            "stars": 5,
+            "text": "Top service!"
+        },
+        {
+            "name": "QTN KLKT",
+            "stars": 5,
+            "text": "Super accueil, Reparation rapide et de qualité supérieure. Les prix son plus que accessible. Je recommande vraiment. Merci à Reda pour son professionnalisme et sa gentillesse."
+        },
+        {
+            "name": "Angelique Appeltans",
+            "stars": 5,
+            "text": "Enfin un magasin avec du professionnalisme."
+        },
+        {
+            "name": "Sarah Rapmazzo",
+            "stars": 5,
+            "text": "Très bon service"
+        },
+        {
+            "name": "Oms S",
+            "stars": 5,
+            "text": "Service au top et professionnel. Super accueil et bon prix"
+        },
+        {
+            "name": "X Babiino",
+            "stars": 5,
+            "text": "Très bon service, personnel très agréable je recommande.\nMerci !"
+        },
+        {
+            "name": "Mxhdii",
+            "stars": 5,
+            "text": "Merci d'avoir réparer mon pc je croyais qu'il était mort mais grâce à vous il re fonctionne en plus d'un service rapide et de grande qualité je vous conseille de passer chez lui"
+        },
+        {
+            "name": "Khirullah Rasuli",
+            "stars": 5,
+            "text": "Awesome guy! Very respectful, cheap prices and good quality !"
+        },
+        {
+            "name": "Mohamad Nagaa",
+            "stars": 5,
+            "text": "Top service !"
+        },
+        {
+            "name": "Momo A",
+            "stars": 5,
+            "text": "Excellent service et très rapide. Très intéressant car disponible jusqu'à très tard le soir. Je recommande 👍👍"
+        }
+    ];
 
-// Init letter animations
-document.querySelectorAll('.la').forEach(splitLetters);
-
-// Hero letters animate on load
-setTimeout(() => {
-  document.querySelectorAll('.hero-la').forEach((el, i) => {
-    setTimeout(() => el.classList.add('hero-anim'), 600 + i * 200);
-  });
-}, 200);
-
-// Page loader
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('done'), 1200);
-});
-
-// Scroll reveal (also triggers letter animations)
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
-
-// Letter animation observer for non-hero .la elements
-const laObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-}, { threshold: 0.3 });
-document.querySelectorAll('.la:not(.hero-la)').forEach(el => laObs.observe(el));
-
-// Services carousel
-const pos = ['l','c','r','b'];
-const desc = [
-  'Screen replacements, battery swaps, charging port fixes, water damage recovery, and software troubleshooting for all smartphone brands.',
-  'From hardware diagnostics to full component replacements, we handle laptops and desktops of all brands. Broken screen, failing hard drive, or overheating GPU — we have got you covered.',
-  'PlayStation, Xbox, Nintendo Switch — we repair disc drive failures, overheating issues, HDMI port damage, stick drift, and more.',
-  'Tablets, smartwatches, music players, and other small electronics. Screen repairs, battery replacements, and general diagnostics.'
-];
-function setSvc(i) {
-  document.querySelectorAll('.si').forEach(m => {
-    let d = (parseInt(m.dataset.i) - i + 4) % 4;
-    m.dataset.p = pos[d];
-  });
-  document.querySelectorAll('.pl2').forEach((p, j) => p.classList.toggle('act', j === i));
-  document.getElementById('sd').textContent = desc[i];
-}
-
-// Counter animation
-const co = new IntersectionObserver(entries => {
-  entries.forEach(x => {
-    if (x.isIntersecting) {
-      const el = x.target, t = parseInt(el.dataset.t), s = performance.now();
-      (function k(n) {
-        const p = Math.min((n - s) / 2000, 1);
-        el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * t);
-        p < 1 ? requestAnimationFrame(k) : el.textContent = t;
-      })(s);
-      co.unobserve(el);
+    // Helper functions
+    function getInitials(name) {
+        return name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
     }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.ctr').forEach(c => co.observe(c));
 
-// Duplicate review cards for seamless loop
-const revTrack = document.getElementById('revTrack');
-if (revTrack) { revTrack.innerHTML += revTrack.innerHTML; }
+    function getAvatarColor(index) {
+        const colors = ['#4285f4', '#ea4335', '#34a853', '#fbbc05'];
+        return colors[index % colors.length];
+    }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth' });
-  });
-});
+    function getTextColor(bgColor) {
+        return bgColor === '#fbbc05' ? '#202124' : '#fff';
+    }
+
+    function createReviewCard(review, index) {
+        if (!review.text) return ''; // Skip reviews without text
+
+        const initials = getInitials(review.name);
+        const avatarColor = getAvatarColor(index);
+        const textColor = getTextColor(avatarColor);
+
+        const starsSVG = '<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>';
+        const stars = starsSVG.repeat(review.stars);
+
+        const googleLogo = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+
+        return `
+    <div class="rcrd">
+      <div class="rcrd-head">
+        <div class="rcrd-avatar" style="background:${avatarColor};color:${textColor}">${initials}</div>
+        <div class="rcrd-info">
+          <span class="rcrd-name">${review.name}</span>
+          <div class="rcrd-meta">
+            <div class="rcrd-stars">${stars}</div>
+          </div>
+        </div>
+        <div class="rcrd-g">${googleLogo}</div>
+      </div>
+      <div class="rcrd-txt">${review.text}</div>
+    </div>
+  `;
+    }
+
+    // Load reviews on page load
+    function loadReviews() {
+        const revTrack = document.getElementById('revTrack');
+        if (!revTrack) return;
+
+        // Filter out reviews without text and create cards
+        const reviewCards = reviewsData
+            .filter(r => r.text)
+            .map((review, index) => createReviewCard(review, index))
+            .join('');
+
+        // Duplicate for seamless loop
+        revTrack.innerHTML = reviewCards + reviewCards;
+    }
+
+    // Letter animation - splits text into individual spans like Framer
+    function splitLetters(el) {
+        const text = el.textContent;
+        const words = text.split(' ');
+        let charIdx = 0;
+        el.innerHTML = words.map(word => {
+            const letters = word.split('').map(char => {
+                const delay = charIdx * 0.03;
+                charIdx++;
+                return '<span class="letter" style="transition-delay:' + delay + 's">' + char + '</span>';
+            }).join('');
+            charIdx++;
+            return '<span style="white-space:nowrap">' + letters + '</span>';
+        }).join('<span class="space"> </span>');
+    }
+
+    // Init letter animations
+    document.querySelectorAll('.la').forEach(splitLetters);
+
+    // Hero letters animate on load
+    setTimeout(() => {
+        document.querySelectorAll('.hero-la').forEach((el, i) => {
+            setTimeout(() => el.classList.add('hero-anim'), 600 + i * 200);
+        });
+    }, 200);
+
+    // Page loader
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('loader').classList.add('done'), 1200);
+        loadReviews(); // Load reviews after page loads
+    });
+
+    // Scroll reveal (also triggers letter animations)
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+    // Letter animation observer for non-hero .la elements
+    const laObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.la:not(.hero-la)').forEach(el => laObs.observe(el));
+
+    // Services carousel
+    const pos = ['l','c','r','b'];
+    const desc = [
+        'Screen replacements, battery swaps, charging port fixes, water damage recovery, and software troubleshooting for all smartphone brands.',
+        'From hardware diagnostics to full component replacements, we handle laptops and desktops of all brands. Broken screen, failing hard drive, or overheating GPU — we have got you covered.',
+        'PlayStation, Xbox, Nintendo Switch — we repair disc drive failures, overheating issues, HDMI port damage, stick drift, and more.',
+        'Tablets, smartwatches, music players, and other small electronics. Screen repairs, battery replacements, and general diagnostics.'
+    ];
+    function setSvc(i) {
+        document.querySelectorAll('.si').forEach(m => {
+            let d = (parseInt(m.dataset.i) - i + 4) % 4;
+            m.dataset.p = pos[d];
+        });
+        document.querySelectorAll('.pl2').forEach((p, j) => p.classList.toggle('act', j === i));
+        document.getElementById('sd').textContent = desc[i];
+    }
+
+    // Counter animation
+    const co = new IntersectionObserver(entries => {
+        entries.forEach(x => {
+            if (x.isIntersecting) {
+                const el = x.target, t = parseInt(el.dataset.t), s = performance.now();
+                (function k(n) {
+                    const p = Math.min((n - s) / 2000, 1);
+                    el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * t);
+                    p < 1 ? requestAnimationFrame(k) : el.textContent = t;
+                })(s);
+                co.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.ctr').forEach(c => co.observe(c));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 </script>
 </body>
 </html>

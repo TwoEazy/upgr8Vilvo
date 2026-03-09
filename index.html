@@ -698,8 +698,11 @@
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            // Skip if href is just "#" or if onclick already handles it
+            if (href === '#' || a.onclick) return;
             e.preventDefault();
-            const t = document.querySelector(a.getAttribute('href'));
+            const t = document.querySelector(href);
             if (t) t.scrollIntoView({ behavior: 'smooth' });
         });
     });

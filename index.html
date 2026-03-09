@@ -16,7 +16,7 @@
 
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth;overflow-x:hidden;scroll-snap-type:y proximity}
-        body{background:var(--bg);color:var(--text);font-family:var(--f);font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        body{background:var(--bg);color:var(--text);font-family:var(--f),serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
         a{text-decoration:none;color:inherit}
         img{display:block;max-width:100%}
         button,input,textarea{font-family:inherit;border:none;outline:none}
@@ -196,6 +196,19 @@
         .mm a{font-family:var(--f);font-size:36px;font-weight:500;text-transform:lowercase;color:#fff;transition:opacity .3s}.mm a:hover{opacity:.5}
         .mcl{position:absolute;top:24px;right:24px;background:#fff;color:var(--dark);padding:10px 24px;border-radius:var(--rb);font-family:var(--f);font-size:14px;font-weight:500;text-transform:uppercase;cursor:pointer}
 
+        /* ═══ ARTICLE MODAL ═══ */
+        .modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s;padding:20px}
+        .modal.open{opacity:1;pointer-events:all}
+        .modal-content{background:#fff;border-radius:16px;padding:50px;max-width:750px;width:100%;max-height:90vh;overflow-y:auto;color:var(--text);position:relative}
+        .modal-close{position:absolute;top:24px;right:24px;width:36px;height:36px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--text);transition:opacity .3s}
+        .modal-close:hover{opacity:.5}
+        .modal-content h1{font-family:var(--f);font-weight:600;font-size:32px;margin-bottom:12px;letter-spacing:-.02em;line-height:1.2}
+        .modal-meta{font-family:var(--f);font-size:13px;color:rgba(0,0,0,.5);margin-bottom:32px;text-transform:uppercase;letter-spacing:.05em}
+        .modal-content p{font-family:var(--f);font-size:15px;line-height:1.8;margin-bottom:18px;color:rgba(0,0,0,.8)}
+        .modal-content ul{list-style:none;margin:20px 0;padding-left:0}
+        .modal-content li{font-family:var(--f);font-size:15px;line-height:1.7;margin-bottom:12px;padding-left:24px;position:relative;color:rgba(0,0,0,.8)}
+        .modal-content li:before{content:'•';position:absolute;left:0;color:var(--dark);font-weight:bold}
+
         /* ═══ RESPONSIVE ═══ */
         @media(max-width:809px){
             .nk{display:none}.nav-cta{display:none}.nm{display:flex}
@@ -213,6 +226,7 @@
             .contact-btn{font-size:15px;padding:16px 28px}
         }
     </style>
+    <title></title>
 </head>
 <body>
 
@@ -256,13 +270,119 @@
 
 <!-- TIPS -->
 <section class="jnl snap-section" id="jnl"><h2 class="rv la">tips</h2><p class="rv rv-d1">Helpful advice to keep your devices running longer. From maintenance tips to knowing when it is time for a professional repair.</p>
-    <div class="jg stagger"><a href="#" class="jc rv"><img src="images/image11.png" alt=""><div class="jt"><p>5 Ways to Protect Your Phone Screen</p><span class="tg">Prevention</span></div></a><a href="#" class="jc rv"><img src="images/image12.png" alt=""><div class="jt"><p>Signs Your Laptop Needs Professional Repair</p><span class="tg">Diagnostics</span></div></a><a href="#" class="jc rv"><img src="images/image13.png" alt=""><div class="jt"><p>How to Keep Your Console Running Cool</p><span class="tg">Maintenance</span></div></a></div></section>
+    <div class="jg stagger"><a href="#" onclick="openArticleModal(event)" class="jc rv"><img src="images/image11.png" alt=""><div class="jt"><p>5 Ways to Protect Your Phone Screen</p><span class="tg">Prevention</span></div></a><a href="#" onclick="openLaptopArticleModal(event)" class="jc rv"><img src="images/image12.png" alt=""><div class="jt"><p>Signs Your Laptop Needs Professional Repair</p><span class="tg">Diagnostics</span></div></a><a href="#" onclick="openConsoleArticleModal(event)" class="jc rv"><img src="images/image13.png" alt=""><div class="jt"><p>How to Keep Your Console Running Cool</p><span class="tg">Maintenance</span></div></a></div></section>
+
+<!-- ARTICLE MODAL -->
+<div class="modal" id="articleModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeArticleModal()">&times;</button>
+        <h1>How to Protect Your Phone Screen</h1>
+        <p class="modal-meta">By UPGR8 — March 9, 2026</p>
+
+        <p>Protecting your phone screen is one of the best ways to avoid costly repairs and keep your device looking and working like new. At UPGR8, we often see how small scratches and cracks can turn into bigger problems, including reduced touch sensitivity and further internal damage.</p>
+
+        <p>One of the most effective ways to protect your screen is to use a high-quality screen protector. Tempered glass protectors help reduce scratches and absorb impact from everyday use. It is also important to use a durable phone case that offers shock absorption and raised edges for extra screen protection. At UPGR8, we recommend an adequate case such as the Nova NL ShockShield, available in our shop.</p>
+
+        <p><strong>Daily habits also make a big difference:</strong></p>
+        <ul>
+            <li>Always use a screen protector.</li>
+            <li>Use an adequate protective case, such as the Nova NL ShockShield available in our shop.</li>
+            <li>Avoid putting your phone in the same pocket or bag as keys, coins, or other sharp objects.</li>
+            <li>Hold and carry your phone carefully to reduce the risk of drops.</li>
+            <li>Do not place your phone on rough or uneven surfaces with the screen facing down.</li>
+        </ul>
+
+        <p>These simple steps can greatly extend the life of your device.</p>
+
+        <p>At UPGR8, we believe prevention is always better than repair. With the right accessories and better everyday habits, you can keep your phone screen safe from cracks and scratches for much longer.</p>
+
+        <p>If your screen is already damaged or you want better protection for your device, UPGR8 is here to help.</p>
+    </div>
+</div>
+
+<!-- LAPTOP REPAIR ARTICLE MODAL -->
+<div class="modal" id="laptopArticleModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeLaptopArticleModal()">&times;</button>
+        <h1>Signs Your Laptop Needs Professional Repair</h1>
+        <p class="modal-meta">By UPGR8 — March 9, 2026</p>
+
+        <p>Laptops often show warning signs before a serious problem happens. At UPGR8, we regularly help customers who notice their device becoming slower, louder, hotter, or harder to charge. Ignoring these early signs can lead to bigger and more expensive repairs later.</p>
+
+        <p>One common sign is when your laptop becomes unusually slow. If it takes a long time to start up, freezes often, or struggles to open programs that used to run normally, there may be a hardware or software issue that needs professional attention. Slow performance can be caused by storage problems, overheating, failing components, or system errors.</p>
+
+        <p>Another warning sign is when the fans become too loud. Laptop fans normally make some noise, but if they are constantly running at high speed or sound much louder than usual, your laptop may be overheating or struggling with dust buildup inside. Loud fans are often a sign that the system is under stress and needs to be checked.</p>
+
+        <p>If your laptop is no longer charging properly, this should also not be ignored. A damaged charging port, faulty battery, worn charger, or internal power issue can stop your laptop from charging correctly. If the battery percentage does not increase, the charger only works in certain positions, or the laptop shuts down when unplugged, it may be time for a professional repair.</p>
+
+        <p>Overheating is another major sign that your laptop needs help. If the device becomes very hot during normal use, turns off unexpectedly, or feels too warm around the keyboard or bottom panel, the cooling system may not be working properly. Overheating can damage internal components and reduce your laptop's lifespan if left unresolved.</p>
+
+        <p><strong>Common warning signs to watch for:</strong></p>
+        <ul>
+            <li>Unusually slow performance, long startup times, or frequent freezing.</li>
+            <li>Fans running constantly at high speed or sounding much louder than normal.</li>
+            <li>Charging issues, including the battery not increasing or charger only working in certain positions.</li>
+            <li>Overheating during normal use or unexpected shutdowns.</li>
+            <li>Device feeling too warm around the keyboard or bottom panel.</li>
+        </ul>
+
+        <p>At UPGR8, we always recommend acting early when you notice these problems. A slow laptop, loud fans, charging issues, and overheating are all signs that your device may need professional inspection and repair. Getting the problem checked in time can help prevent more serious damage and keep your laptop running reliably for longer.</p>
+
+        <p>If your laptop is showing any of these signs, UPGR8 is here to help with professional diagnostics and repair services.</p>
+    </div>
+</div>
+
+<!-- CONSOLE COOLING ARTICLE MODAL -->
+<div class="modal" id="consoleArticleModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeConsoleArticleModal()">&times;</button>
+        <h1>How to Keep Your Console Running Cool</h1>
+        <p class="modal-meta">By UPGR8 — March 9, 2026</p>
+
+        <p>Keeping your console cool is one of the best ways to protect its performance and extend its lifespan. At UPGR8, we know that overheating can lead to loud fan noise, game crashes, reduced performance, and unexpected shutdowns. That is why proper airflow and regular maintenance are so important.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Give Your Console Enough Ventilation</h2>
+        <p>One of the most important steps is making sure your console has enough space around it. Do not place it inside a closed cabinet, tight shelf, or directly against a wall. Your console needs room to pull in cool air and push out hot air. Blocking the vents can quickly cause heat to build up.</p>
+
+        <p>It is also best to place your console on a hard, flat surface instead of carpet, bedding, or other soft materials. Soft surfaces can block airflow and trap heat underneath the system.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Clean Dust Before It Becomes a Problem</h2>
+        <p>Dust buildup is a major reason consoles start overheating. Over time, dust can collect around the vents, fan, and cooling system, making it harder for heat to escape. This often causes the fan to work harder and become much louder than normal.</p>
+
+        <p>Cleaning the exterior vents regularly can help reduce this risk. If the console is already getting hot, noisy, or showing performance issues, it may need a deeper internal cleaning.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Watch for Loud Fans and Heat Warnings</h2>
+        <p>A console will normally get warm during gaming, but it should not become excessively hot. If the fan is constantly loud, the system feels unusually hot, or the console shuts down during use, these are warning signs that it may be overheating.</p>
+
+        <p>Ignoring these signs can lead to bigger hardware problems over time. It is always better to deal with overheating early before it causes more serious damage.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Keep a PS5 on Its Side for a More Cautious Setup</h2>
+        <p>If you are using a PS5, many people choose to keep it on its side instead of upright as a precaution. The concern is that the liquid metal used for cooling may shift over time, which can reduce proper heat transfer from the SoC to the cooler. When heat is not transferred efficiently, the chip can run hotter and the console may become more prone to overheating.</p>
+
+        <p>For that reason, horizontal placement is often seen as the safer option for long-term cooling, especially if you want a more cautious setup.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Avoid Hot Environments</h2>
+        <p>Your console will always struggle more in a hot room. Try to avoid placing it near radiators, direct sunlight, or other heat sources. A cooler room helps the system cool itself more effectively and reduces stress on the internal components.</p>
+
+        <p>Long gaming sessions in warm conditions can make overheating worse, especially if the console already has limited airflow or dust buildup.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Professional Help for Console Overheating</h2>
+        <p>If your console is overheating, getting very loud, or shutting down while gaming, professional repair may be the best solution. In many cases, the issue is caused by dust buildup, cooling problems, or worn thermal materials inside the console.</p>
+
+        <p>At UPGR8, we help customers diagnose and fix console overheating issues before they turn into more serious damage.</p>
+
+        <h2 style="font-size:20px;margin-top:28px;margin-bottom:16px">Final Thoughts</h2>
+        <p>If you want to keep your console running cool, focus on the basics: give it enough ventilation, keep it clean, avoid hot environments, and pay attention to loud fan noise or overheating signs. If you use a PS5, keeping it on its side can also be a sensible precaution for better long-term cooling.</p>
+
+        <p>Taking care of your console now can help prevent performance issues and costly repairs later. If your console is already overheating, UPGR8 is here to help.</p>
+    </div>
+</div>
 
 <!-- CONTACT -->
 <section class="cnt2 snap-section" id="cnt"><div class="ci"><img src="images/image14.png" alt=""><div class="cc rv"><h2 class="la">get in touch</h2><p>Need a repair or want a custom PC build? Contact us directly via WhatsApp or email for quick quotes and booking.</p><div class="contact-opts"><a href="https://wa.me/32496914995" target="_blank" class="contact-btn whatsapp-btn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>Contact on WhatsApp</span></a><a href="mailto:info@upgr8.be" class="contact-btn email-btn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>info@upgr8.be</span></a></div><p class="contact-number">Contact us: +32 496 91 49 95</p></div></div></section>
 
 <!-- FOOTER -->
-<footer class="ftr snap-section"><div class="fii"><div class="ftp"><div><div class="fs">Visit us.</div><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank" class="fe">Leuvensestraat 76</a><p class="fde">UPGR8 is a consumer electronics repair business based in Vilvoorde, Belgium. We fix smartphones, tablets, PCs, gaming consoles, smartwatches, and more.</p><div class="floc">Contact us: +32 496 91 49 95 <br> Leuvensestraat 76<br>1800 Vilvoorde, Belgium</div></div><div class="fn"><ul><li class="fni"><a href="#hero">Home</a><span class="cnt"></span></li><li class="fni"><a href="#proj">Services</a><span class="cnt">(05)</span></li><li class="fni"><a href="#jnl">Tips</a><span class="cnt">(03)</span></li><li class="fni"><a href="#cnt">Contact</a><span class="cnt"></span></li></ul></div><div><div class="fsl">Find Us Online</div><div class="soc"><a href="https://www.instagram.com/upgr8.be/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a></div></div></div><div class="fbt"><div class="fwm">UPGR8</div><div class="fcp">©2025 UPGR8. Vilvoorde, Belgium.</div></div></div></footer>
+<footer class="ftr snap-section"><div class="fii"><div class="ftp"><div><div class="fs">Visit us.</div><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank" class="fe">Leuvensestraat 76</a><p class="fde">UPGR8 is a consumer electronics repair business based in Vilvoorde, Belgium. We fix smartphones, tablets, PCs, gaming consoles, smartwatches, and more.</p><div class="floc">Contact us: +32 496 91 49 95 <br> Leuvensestraat 76<br>1800 Vilvoorde, Belgium</div></div><div class="fn"><ul><li class="fni"><a href="#hero">Home</a><span class="cnt"></span></li><li class="fni"><a href="#proj">Services</a><span class="cnt"></span></li><li class="fni"><a href="#jnl">Tips</a><span class="cnt"></span></li><li class="fni"><a href="#cnt">Contact</a><span class="cnt"></span></li></ul></div><div><div class="fsl">Find Us Online</div><div class="soc"><a href="https://www.instagram.com/upgr8.be/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="https://maps.app.goo.gl/Z1txL5fNGyjfFBtZ9" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a></div></div></div><div class="fbt"><div class="fwm">UPGR8</div><div class="fcp">©2025 UPGR8. Vilvoorde, Belgium.</div></div></div></footer>
 
 <script>
     // Google Maps Reviews Data
@@ -582,6 +702,49 @@
             const t = document.querySelector(a.getAttribute('href'));
             if (t) t.scrollIntoView({ behavior: 'smooth' });
         });
+    });
+
+    // Article Modal Functions
+    function openArticleModal(e) {
+        e.preventDefault();
+        document.getElementById('articleModal').classList.add('open');
+    }
+
+    function closeArticleModal() {
+        document.getElementById('articleModal').classList.remove('open');
+    }
+
+    // Laptop Article Modal Functions
+    function openLaptopArticleModal(e) {
+        e.preventDefault();
+        document.getElementById('laptopArticleModal').classList.add('open');
+    }
+
+    function closeLaptopArticleModal() {
+        document.getElementById('laptopArticleModal').classList.remove('open');
+    }
+
+    // Console Article Modal Functions
+    function openConsoleArticleModal(e) {
+        e.preventDefault();
+        document.getElementById('consoleArticleModal').classList.add('open');
+    }
+
+    function closeConsoleArticleModal() {
+        document.getElementById('consoleArticleModal').classList.remove('open');
+    }
+
+    // Close modals when clicking outside
+    document.getElementById('articleModal').addEventListener('click', (e) => {
+        if (e.target.id === 'articleModal') closeArticleModal();
+    });
+
+    document.getElementById('laptopArticleModal').addEventListener('click', (e) => {
+        if (e.target.id === 'laptopArticleModal') closeLaptopArticleModal();
+    });
+
+    document.getElementById('consoleArticleModal').addEventListener('click', (e) => {
+        if (e.target.id === 'consoleArticleModal') closeConsoleArticleModal();
     });
 </script>
 </body>
